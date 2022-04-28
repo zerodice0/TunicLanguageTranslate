@@ -1,7 +1,13 @@
 import { Line, Options, Point } from "./Drawer.model";
 
-export const drawLine = (context: CanvasRenderingContext2D, line: Line) => {
+export const drawLine = (
+  context: CanvasRenderingContext2D,
+  line: Line,
+  options?: Options
+) => {
   const { start, end } = line;
+  context.globalAlpha = options?.globalAlpha ?? 1.0;
+  context.lineWidth = options?.lineWidth ?? 1.0;
 
   if (context) {
     context.beginPath();
@@ -9,20 +15,17 @@ export const drawLine = (context: CanvasRenderingContext2D, line: Line) => {
     context.lineTo(end.x, end.y);
     context.stroke();
   }
+
+  context.globalAlpha = 1.0;
+  context.lineWidth = 1;
 };
 
 export const drawLines = (
   context: CanvasRenderingContext2D,
   lines: Line[],
-  options: Options
+  options?: Options
 ) => {
-  if (options) {
-    const { globalAlpha } = options;
-    globalAlpha && (context.globalAlpha = globalAlpha);
-  }
-
-  lines.forEach(line => drawLine(context, line));
-  context.globalAlpha = 1.0;
+  lines.forEach(line => drawLine(context, line, options));
 };
 
 export const drawPoint = (context: CanvasRenderingContext2D, point: Point) => {
@@ -40,10 +43,8 @@ export const drawPoints = (
   points: Point[],
   options?: Options
 ) => {
-  if (options) {
-    const { globalAlpha } = options;
-    globalAlpha && (context.globalAlpha = globalAlpha);
-  }
+  context.globalAlpha = options?.globalAlpha ?? 1;
+
   points.forEach(point => drawPoint(context, point));
   context.globalAlpha = 1.0;
 };

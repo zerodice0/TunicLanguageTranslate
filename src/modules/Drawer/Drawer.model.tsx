@@ -9,5 +9,6 @@ export interface Line {
 }
 
 export interface Options {
-  globalAlpha: number;
+  globalAlpha?: number;
+  lineWidth?: number;
 }
