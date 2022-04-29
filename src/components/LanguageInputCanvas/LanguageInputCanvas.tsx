@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import { drawLine, drawLines, drawPoints } from "../../modules/Drawer/Drawer";
+import { drawLine, drawLines } from "../../modules/Drawer/Drawer";
 import {
   calculateColumns,
   calculateConsonantsAndVowels,
   calculateRows,
   LanguageInputCanvasProps,
+  parsingConsonants,
+  parsingVowels,
 } from "./LanguageInputCanvas.model";
 
 const Canvas = styled.canvas<LanguageInputCanvasProps>`
@@ -18,19 +20,22 @@ export const LanguageInputCanvas = ({
   height,
   columnCount = 8,
   rowCount = 6,
+  consonants,
+  vowels,
 }: LanguageInputCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const rows = calculateRows(width, rowCount);
   const columns = calculateColumns(height, columnCount);
-  const { consonants, vowels } = calculateConsonantsAndVowels(
-    width,
-    height,
-    columnCount,
-    rowCount,
-    rows,
-    columns
-  );
+  const { consonants: _consonants, vowels: _vowels } =
+    calculateConsonantsAndVowels(
+      width,
+      height,
+      columnCount,
+      rowCount,
+      rows,
+      columns
+    );
 
   useEffect(() => {
     const context = canvasRef.current?.getContext("2d");
@@ -77,16 +82,33 @@ export const LanguageInputCanvas = ({
       //   { globalAlpha: 0.3 }
       // );
 
-      drawLines(context, consonants.upSide, { lineWidth: 5 });
-      drawLines(context, consonants.downSide, { lineWidth: 5 });
-      drawLines(context, vowels.upSide, { lineWidth: 5 });
-      drawLines(context, vowels.downSide, { lineWidth: 5 });
+      const consonantList = consonants?.map(
+        consonant => [..._consonants.upSide, ..._consonants.downSide][consonant]
+      );
+      const vowelList = vowels?.map(
+        vowel => [..._vowels.upSide, ..._vowels.downSide][vowel]
+      );
+      consonantList && drawLines(context, consonantList, { lineWidth: 5 });
+      if (
+        consonants?.some(
+          consonant => consonant === 0 || consonant === 1 || consonant === 2
+        )
+      ) {
+        drawLines(context, _consonants.sub, { lineWidth: 5 });
+      }
+      vowelList && drawLines(context, vowelList, { lineWidth: 5 });
     }
   }, []);
 
   return (
     <div>
       <Canvas ref={canvasRef} width={width} height={height} />
+      <div>
+        consonants: <span>{consonants && parsingConsonants(consonants)}</span>
+      </div>
+      <div>
+        vowels: <span>{vowels && parsingVowels(vowels)}</span>
+      </div>
     </div>
   );
 };
