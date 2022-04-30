@@ -7,8 +7,6 @@ import {
   calculateConsonantsAndVowels,
   calculateRows,
   LanguageInputCanvasProps,
-  parsingConsonants,
-  parsingVowels,
 } from "./LanguageInputCanvas.model";
 
 const Canvas = styled.canvas<LanguageInputCanvasProps>`
@@ -22,6 +20,9 @@ export const LanguageInputCanvas = ({
   rowCount = 4,
   consonants,
   vowels,
+  defaultLineColor = "black",
+  defaultLineWidth = 1,
+  isDrawingFrame = false,
 }: LanguageInputCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -41,20 +42,25 @@ export const LanguageInputCanvas = ({
     const context = canvasRef.current?.getContext("2d");
     if (context) {
       // Draw Frame
-      drawLines(
-        context,
-        [
-          ...rows.map(row => ({
-            start: { x: row, y: 0 },
-            end: { x: row, y: height },
-          })),
-          ...columns.map(column => ({
-            start: { x: 0, y: column },
-            end: { x: width, y: column },
-          })),
-        ],
-        { globalAlpha: 0.3 }
-      );
+      isDrawingFrame &&
+        drawLines(
+          context,
+          [
+            ...rows.map(row => ({
+              start: { x: row, y: 0 },
+              end: { x: row, y: height },
+            })),
+            ...columns.map(column => ({
+              start: { x: 0, y: column },
+              end: { x: width, y: column },
+            })),
+          ],
+          {
+            globalAlpha: 0.3,
+            lineColor: defaultLineColor,
+            lineWidth: defaultLineWidth,
+          }
+        );
 
       // Draw Crossline
       drawLine(
@@ -63,7 +69,7 @@ export const LanguageInputCanvas = ({
           start: { x: 0, y: height / 2 },
           end: { x: width, y: height / 2 },
         },
-        { lineWidth: 5, lineColor: "white" }
+        { lineWidth: defaultLineWidth, lineColor: defaultLineColor }
       );
 
       // Draw Base Points
@@ -89,31 +95,31 @@ export const LanguageInputCanvas = ({
         vowel => [..._vowels.upSide, ..._vowels.downSide][vowel]
       );
       consonantList &&
-        drawLines(context, consonantList, { lineWidth: 5, lineColor: "white" });
+        drawLines(context, consonantList, {
+          lineWidth: defaultLineWidth,
+          lineColor: defaultLineColor,
+        });
       if (
         consonants?.some(
           consonant => consonant === 0 || consonant === 1 || consonant === 2
         )
       ) {
         drawLines(context, _consonants.sub, {
-          lineWidth: 5,
-          lineColor: "white",
+          lineWidth: defaultLineWidth,
+          lineColor: defaultLineColor,
         });
       }
       vowelList &&
-        drawLines(context, vowelList, { lineWidth: 5, lineColor: "white" });
+        drawLines(context, vowelList, {
+          lineWidth: defaultLineWidth,
+          lineColor: defaultLineColor,
+        });
     }
   }, []);
 
   return (
     <div>
       <Canvas ref={canvasRef} width={width} height={height} />
-      <div>
-        consonants: <span>{consonants && parsingConsonants(consonants)}</span>
-      </div>
-      <div>
-        vowels: <span>{vowels && parsingVowels(vowels)}</span>
-      </div>
     </div>
   );
 };
