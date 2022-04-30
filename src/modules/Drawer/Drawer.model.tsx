@@ -11,4 +11,5 @@ export interface Line {
 export interface Options {
   globalAlpha?: number;
   lineWidth?: number;
+  lineColor?: string;
 }

@@ -8,6 +8,7 @@ export const drawLine = (
   const { start, end } = line;
   context.globalAlpha = options?.globalAlpha ?? 1.0;
   context.lineWidth = options?.lineWidth ?? 1.0;
+  context.strokeStyle = options?.lineColor ?? "black";
 
   if (context) {
     context.beginPath();
