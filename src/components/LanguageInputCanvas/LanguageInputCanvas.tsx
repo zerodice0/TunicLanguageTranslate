@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import { drawLine, drawLines } from "../../modules/Drawer/Drawer";
@@ -19,7 +19,7 @@ export const LanguageInputCanvas = ({
   width,
   height,
   columnCount = 8,
-  rowCount = 6,
+  rowCount = 4,
   consonants,
   vowels,
 }: LanguageInputCanvasProps) => {
@@ -63,7 +63,7 @@ export const LanguageInputCanvas = ({
           start: { x: 0, y: height / 2 },
           end: { x: width, y: height / 2 },
         },
-        { lineWidth: 5 }
+        { lineWidth: 5, lineColor: "white" }
       );
 
       // Draw Base Points
@@ -88,15 +88,20 @@ export const LanguageInputCanvas = ({
       const vowelList = vowels?.map(
         vowel => [..._vowels.upSide, ..._vowels.downSide][vowel]
       );
-      consonantList && drawLines(context, consonantList, { lineWidth: 5 });
+      consonantList &&
+        drawLines(context, consonantList, { lineWidth: 5, lineColor: "white" });
       if (
         consonants?.some(
           consonant => consonant === 0 || consonant === 1 || consonant === 2
         )
       ) {
-        drawLines(context, _consonants.sub, { lineWidth: 5 });
+        drawLines(context, _consonants.sub, {
+          lineWidth: 5,
+          lineColor: "white",
+        });
       }
-      vowelList && drawLines(context, vowelList, { lineWidth: 5 });
+      vowelList &&
+        drawLines(context, vowelList, { lineWidth: 5, lineColor: "white" });
     }
   }, []);
 
