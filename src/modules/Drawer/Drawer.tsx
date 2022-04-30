@@ -16,9 +16,6 @@ export const drawLine = (
     context.lineTo(end.x, end.y);
     context.stroke();
   }
-
-  context.globalAlpha = 1.0;
-  context.lineWidth = 1;
 };
 
 export const drawLines = (
@@ -26,7 +23,7 @@ export const drawLines = (
   lines: Line[],
   options?: Options
 ) => {
-  lines.forEach(line => drawLine(context, line, options));
+  lines.map(line => drawLine(context, line, options));
 };
 
 export const drawPoint = (context: CanvasRenderingContext2D, point: Point) => {
@@ -47,5 +44,4 @@ export const drawPoints = (
   context.globalAlpha = options?.globalAlpha ?? 1;
 
   points.forEach(point => drawPoint(context, point));
-  context.globalAlpha = 1.0;
 };
