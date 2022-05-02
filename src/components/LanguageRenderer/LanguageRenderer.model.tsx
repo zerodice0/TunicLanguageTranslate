@@ -1,4 +1,4 @@
-import { Line } from "../..//modules/Drawer/Drawer.model";
+import { Line } from "../../modules/Drawer/Drawer.model";
 
 export interface LanguageInputCanvasProps {
   width: number;

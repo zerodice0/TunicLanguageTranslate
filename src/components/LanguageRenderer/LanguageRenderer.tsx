@@ -7,7 +7,7 @@ import {
   calculateConsonantsAndVowels,
   calculateRows,
   LanguageInputCanvasProps,
-} from "./LanguageInputCanvas.model";
+} from "./LanguageRenderer.model";
 
 const Canvas = styled.canvas<LanguageInputCanvasProps>`
   <canvas width=${prop => prop.width} height=${prop => prop.height}/>
