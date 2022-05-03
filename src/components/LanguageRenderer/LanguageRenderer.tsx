@@ -1,19 +1,14 @@
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
 
 import { drawLine, drawLines } from "../../modules/Drawer/Drawer";
 import {
   calculateColumns,
   calculateConsonantsAndVowels,
   calculateRows,
-  LanguageInputCanvasProps,
+  LanguageRendererProps,
 } from "./LanguageRenderer.model";
 
-const Canvas = styled.canvas<LanguageInputCanvasProps>`
-  <canvas width=${prop => prop.width} height=${prop => prop.height}/>
-`;
-
-export const LanguageInputCanvas = ({
+export const LanguageRenderer = ({
   width,
   height,
   columnCount = 8,
@@ -23,7 +18,7 @@ export const LanguageInputCanvas = ({
   defaultLineColor = "black",
   defaultLineWidth = 1,
   isDrawingFrame = false,
-}: LanguageInputCanvasProps) => {
+}: LanguageRendererProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const rows = calculateRows(width, rowCount);
@@ -119,7 +114,7 @@ export const LanguageInputCanvas = ({
 
   return (
     <div>
-      <Canvas ref={canvasRef} width={width} height={height} />
+      <canvas ref={canvasRef} width={width} height={height} />
     </div>
   );
 };

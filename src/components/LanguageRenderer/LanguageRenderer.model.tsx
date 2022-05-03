@@ -1,6 +1,6 @@
 import { Line } from "../../modules/Drawer/Drawer.model";
 
-export interface LanguageInputCanvasProps {
+export interface LanguageRendererProps {
   width: number;
   height: number;
   rowCount?: number;
