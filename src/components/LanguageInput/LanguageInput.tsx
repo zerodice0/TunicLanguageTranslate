@@ -1,13 +1,33 @@
-import { Center, Checkbox, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Checkbox,
+  Flex,
+  Grid,
+  GridItem,
+  Text,
+} from "@chakra-ui/react";
 
-import { LanguageInputCanvas } from "../LanguageRenderer/LanguageRenderer";
+import { LanguageRenderer } from "../LanguageRenderer/LanguageRenderer";
+import { ToggleButton } from "../ToggleButton/ToggleButton";
 
-export const LanguageInput = () => (
-  <Flex direction="row">
-    <Consonants />
-    <Vowels />
-  </Flex>
-);
+export const LanguageInput = () => {
+  const enterLanguage = () => {
+    console.log("Enter Language");
+  };
+
+  return (
+    <form>
+      <Flex direction="row">
+        <Consonants />
+        <Vowels />
+      </Flex>
+      <Center marginTop="5">
+        <Button onClick={enterLanguage}>Enter</Button>
+      </Center>
+    </form>
+  );
+};
 
 const Consonants = () => (
   <Flex direction="column" width="100%" marginTop="5">
@@ -16,17 +36,19 @@ const Consonants = () => (
       <Grid key={row} templateColumns="repeat(3, 1fr)" marginTop="5">
         {[0, 1, 2].map(consonant => (
           <GridItem key={consonant} width="100%">
-            <Center>
-              <LanguageInputCanvas
-                width={50}
-                height={75}
-                consonants={[consonant + row * 3]}
-                defaultLineColor="#ffffff"
-                defaultLineWidth={1}
-                isDrawingFrame={true}
-              />
+            <Center padding={5}>
+              <ToggleButton distance={1} blur={15}>
+                <LanguageRenderer
+                  width={50}
+                  height={75}
+                  consonants={[consonant + row * 3]}
+                  defaultLineColor="#1A202C"
+                  defaultLineWidth={1}
+                  isDrawingFrame={true}
+                />
+                {/* <Checkbox /> */}
+              </ToggleButton>
             </Center>
-            <Checkbox />
           </GridItem>
         ))}
       </Grid>
@@ -42,7 +64,7 @@ const Vowels = () => (
         {[0, 1, 2].map(vowel => (
           <GridItem key={vowel} width="100%">
             <Center>
-              <LanguageInputCanvas
+              <LanguageRenderer
                 width={50}
                 height={75}
                 vowels={[vowel + row * 3]}
