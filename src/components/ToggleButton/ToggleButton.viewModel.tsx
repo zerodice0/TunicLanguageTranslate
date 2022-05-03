@@ -10,10 +10,13 @@ const addHex = (a: number, b: number) =>
     .toString(16)
     .padStart(2, "0");
 
+export const isValidRgbCode = (color: string): boolean =>
+  RegExp(/^#[0-9A-Fa-f]{6}/).test(color);
+
 export const calculateShadowColors = (
   rgb: string
 ): NeumorphismColors | null => {
-  if (RegExp(/^#[0-9A-Fa-f]{6}/).test(rgb)) {
+  if (isValidRgbCode(rgb)) {
     return null;
   }
 

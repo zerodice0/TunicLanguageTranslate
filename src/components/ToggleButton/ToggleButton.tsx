@@ -1,6 +1,9 @@
 import { ToggleButtonProps } from "./ToggleButton.model";
 import { ToggleButtonStyled } from "./ToggleButton.view";
-import { calculateShadowColors } from "./ToggleButton.viewModel";
+import {
+  calculateShadowColors,
+  isValidRgbCode,
+} from "./ToggleButton.viewModel";
 
 export const ToggleButton = ({
   distance = 5,
@@ -10,6 +13,11 @@ export const ToggleButton = ({
   color = "#ffffff",
   children,
 }: ToggleButtonProps) => {
+  if (!isValidRgbCode(color)) {
+    color = "#dddddd";
+    console.warn("Color is not valid, default color(#dddddd) is used.");
+  }
+
   const { shadow, base, highlight } = calculateShadowColors(color) ?? {
     shadow: "#a6a6a6",
     base: color,
