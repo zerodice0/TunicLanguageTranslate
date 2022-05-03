@@ -2,7 +2,7 @@ import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { LanguageInput } from "./components/LanguageInput/LanguageInput";
-import { LanguageInputCanvas } from "./components/LanguageRenderer/LanguageRenderer";
+import { LanguageRenderer } from "./components/LanguageRenderer/LanguageRenderer";
 import {
   parsingConsonantsToIPA,
   parsingVowelsToIPA,
@@ -26,7 +26,7 @@ export default function App() {
             <Text>Input</Text>
           </Center>
           <Center>
-            <LanguageInputCanvas
+            <LanguageRenderer
               width={100}
               height={150}
               isDrawingFrame={true}
