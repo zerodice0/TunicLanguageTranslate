@@ -8,7 +8,9 @@ export interface LanguageRendererProps {
   consonants?: number[];
   vowels?: number[];
   defaultLineWidth?: number;
+  hoverLineWidth?: number;
   defaultLineColor?: string;
+  hoverLineColor?: string;
   isDrawingFrame?: boolean;
 }
 
@@ -16,7 +18,7 @@ interface Language {
   vowels: LanguageComponent;
   consonants: LanguageComponent;
 }
-interface LanguageComponent {
+export interface LanguageComponent {
   upSide: Line[];
   downSide: Line[];
   sub: Line[];
