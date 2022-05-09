@@ -37,12 +37,25 @@ const Consonants = () => (
         {[0, 1, 2].map(consonant => (
           <GridItem key={consonant} width="100%">
             <Center padding={5}>
-              <ToggleButton distance={1} blur={15}>
+              <ToggleButton
+                normal={{
+                  distance: 4,
+                  blur: 10,
+                  color: "#1a202c",
+                  intensity: 30,
+                }}
+                hover={{
+                  distance: 3,
+                  blur: 20,
+                  color: "#dddddd",
+                  intensity: 60,
+                }}
+              >
                 <LanguageRenderer
                   width={50}
                   height={75}
                   consonants={[consonant + row * 3]}
-                  defaultLineColor="#1A202C"
+                  defaultLineColor="#dddddd"
                   defaultLineWidth={1}
                   isDrawingFrame={true}
                 />

@@ -32,8 +32,10 @@ export default function App() {
               isDrawingFrame={true}
               consonants={inputLanguage.consonants}
               vowels={inputLanguage.vowels}
-              defaultLineColor="#ffffff"
+              defaultLineColor="#dddddd"
+              hoverLineColor="#1a202c"
               defaultLineWidth={2}
+              hoverLineWidth={2}
             />
           </Center>
           <Text>
