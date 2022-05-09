@@ -13,10 +13,21 @@ const addHex = (a: number, b: number) =>
 export const isValidRgbCode = (color: string): boolean =>
   RegExp(/^#[0-9A-Fa-f]{6}/).test(color);
 
+export const calculateBackgroundShadowProps = (
+  distance: number,
+  blur: number,
+  shadow: string,
+  highlight: string
+) => [
+  `${distance}px ${distance}px ${blur}px ${shadow}`,
+  `-${distance}px -${distance}px ${blur}px ${highlight}`,
+];
+
 export const calculateShadowColors = (
-  rgb: string
+  rgb: string,
+  intensity: number
 ): NeumorphismColors | null => {
-  if (isValidRgbCode(rgb)) {
+  if (!isValidRgbCode(rgb)) {
     return null;
   }
 
@@ -27,8 +38,8 @@ export const calculateShadowColors = (
   ];
 
   return {
-    shadow: `#${rgbs.map(rgb => substractHex(rgb, 55)).join()}`,
+    shadow: `#${rgbs.map(rgb => substractHex(rgb, intensity)).join("")}`,
     base: rgb,
-    highlight: `#${rgbs.map(rgb => addHex(rgb, 55)).join()}`,
+    highlight: `#${rgbs.map(rgb => addHex(rgb, intensity)).join("")}`,
   };
 };
