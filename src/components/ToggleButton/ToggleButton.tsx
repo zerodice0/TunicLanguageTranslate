@@ -1,31 +1,58 @@
 import { ToggleButtonProps } from "./ToggleButton.model";
 import { ToggleButtonStyled } from "./ToggleButton.view";
 import {
+  calculateBackgroundShadowProps,
   calculateShadowColors,
   isValidRgbCode,
 } from "./ToggleButton.viewModel";
 
 export const ToggleButton = ({
-  distance = 5,
-  blur = 10,
-  padding = 0,
-  radius = 5,
-  color = "#ffffff",
+  normal,
+  hover,
   children,
 }: ToggleButtonProps) => {
-  if (!isValidRgbCode(color)) {
-    color = "#dddddd";
+  const color = normal.color ?? "#dddddd";
+  const intensity = normal.intensity ?? 5;
+  const distance = normal.distance ?? 5;
+  const blur = normal.blur ?? 10;
+  const padding = normal.padding ?? 0;
+  const radius = normal.radius ?? 5;
+
+  if (normal.color && !isValidRgbCode(normal.color)) {
     console.warn("Color is not valid, default color(#dddddd) is used.");
   }
 
-  const { shadow, base, highlight } = calculateShadowColors(color) ?? {
+  const defaultShadowColor = {
     shadow: "#a6a6a6",
     base: color,
     highlight: "#ffffff",
   };
+  const { shadow, base, highlight } =
+    calculateShadowColors(color, intensity) ?? defaultShadowColor;
 
-  const backgroundShadow = `${distance}px ${distance}px ${blur}px ${shadow}`;
-  const foregroundShadow = `-${distance}px -${distance}px ${blur}px ${highlight}`;
+  const {
+    shadow: hoverShadow,
+    base: hoverBase,
+    highlight: hoverHighlight,
+  } = calculateShadowColors(
+    hover?.color ?? color,
+    hover?.intensity ?? intensity
+  ) ?? defaultShadowColor;
+
+  const [backgroundShadow, foregroundShadow] = calculateBackgroundShadowProps(
+    distance,
+    blur,
+    shadow,
+    highlight
+  );
+
+  const [hoverBackgroundShadow, hoverForegroundShadow] =
+    calculateBackgroundShadowProps(
+      hover?.distance ?? distance,
+      hover?.blur ?? blur,
+      hoverShadow,
+      hoverHighlight
+    );
 
   return (
     <ToggleButtonStyled
@@ -36,6 +63,9 @@ export const ToggleButton = ({
       color={base}
       backgroundShadow={backgroundShadow}
       foregroundShadow={foregroundShadow}
+      hoverColor={hoverBase}
+      hoverBackgroundShadow={hoverBackgroundShadow}
+      hoverForegroundShadow={hoverForegroundShadow}
     >
       {children}
     </ToggleButtonStyled>

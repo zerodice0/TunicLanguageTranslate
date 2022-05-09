@@ -8,4 +8,11 @@ export const ToggleButtonStyled = styled.div<ToggleButtonStyledProps>`
   background: ${props => props.color ?? "#ffffff"};
   box-shadow: ${props => props.backgroundShadow},
     ${props => props.foregroundShadow};
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: ${props => props.hoverColor ?? props.color};
+    box-shadow: ${props => props.hoverBackgroundShadow},
+      ${props => props.hoverForegroundShadow};
+  }
 `;
