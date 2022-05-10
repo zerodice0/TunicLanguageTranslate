@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { LanguageRenderer } from "../LanguageRenderer/LanguageRenderer";
 import { ToggleButtonProps } from "./ToggleButton.model";
