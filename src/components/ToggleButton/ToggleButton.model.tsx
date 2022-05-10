@@ -3,12 +3,8 @@ export interface ToggleButtonStyledProps {
   blur?: number;
   padding?: number;
   radius?: number;
-  backgroundShadow: string;
-  hoverBackgroundShadow: string;
+  shadow?: string;
   color: string;
-  hoverColor: string;
-  foregroundShadow: string;
-  hoverForegroundShadow: string;
 }
 
 interface ToggleButtonPropsComponent {
@@ -18,11 +14,15 @@ interface ToggleButtonPropsComponent {
   padding?: number;
   radius?: number;
   color?: string;
+  lineColor?: string;
+  isReverseShadow?: boolean;
 }
 export interface ToggleButtonProps {
   normal: ToggleButtonPropsComponent;
   hover?: ToggleButtonPropsComponent;
-  children?: React.ReactNode;
+  checked?: ToggleButtonPropsComponent;
+  consonants?: number[];
+  vowels?: number[];
 }
 
 export interface NeumorphismColors {

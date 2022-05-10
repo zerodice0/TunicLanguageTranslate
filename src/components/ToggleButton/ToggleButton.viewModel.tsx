@@ -17,11 +17,16 @@ export const calculateBackgroundShadowProps = (
   distance: number,
   blur: number,
   shadow: string,
-  highlight: string
-) => [
-  `${distance}px ${distance}px ${blur}px ${shadow}`,
-  `-${distance}px -${distance}px ${blur}px ${highlight}`,
-];
+  highlight: string,
+  isReverse?: boolean
+) => {
+  const result = [
+    `${distance}px ${distance}px ${blur}px ${shadow}`,
+    `-${distance}px -${distance}px ${blur}px ${highlight}`,
+  ];
+
+  return isReverse ? result.reverse() : result;
+};
 
 export const calculateShadowColors = (
   rgb: string,
