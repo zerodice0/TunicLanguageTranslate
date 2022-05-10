@@ -27,65 +27,32 @@ export const ToggleButton = ({
   const [isHovered, setHovered] = useState(false);
 
   const getLineColor = () => {
-    if (isPushed) {
-      return checked?.lineColor;
-    } else if (isHovered) {
-      return hover?.lineColor;
-    }
-
-    return normal?.lineColor;
+    const _current =
+      (isPushed ? checked : isHovered ? hover : normal) ?? normal;
+    return _current.lineColor ?? color;
   };
 
   const getBackground = () => {
-    if (isPushed) {
-      return checked?.color ?? "#dddddd";
-    } else if (isHovered) {
-      return hover?.color ?? "#dddddd";
-    }
-
-    return normal.color ?? "#dddddd";
+    const _current =
+      (isPushed ? checked : isHovered ? hover : normal) ?? normal;
+    return _current.color ?? color;
   };
 
   const getShadow = () => {
-    if (isPushed) {
-      const colors = calculateShadowColors(
-        checked?.color ?? color,
-        checked?.intensity ?? intensity
-      );
+    const _current =
+      (isPushed ? checked : isHovered ? hover : normal) ?? normal;
 
-      return calculateBackgroundShadowProps(
-        checked?.distance ?? distance,
-        checked?.blur ?? blur,
-        colors?.shadow ?? shadow,
-        colors?.highlight ?? highlight,
-        checked?.isReverseShadow ?? false
-      );
-    } else if (isHovered) {
-      const colors = calculateShadowColors(
-        hover?.color ?? color,
-        hover?.intensity ?? intensity
-      );
-
-      return calculateBackgroundShadowProps(
-        hover?.distance ?? distance,
-        hover?.blur ?? blur,
-        colors?.shadow ?? shadow,
-        colors?.highlight ?? highlight,
-        hover?.isReverseShadow ?? false
-      );
-    }
-
-    const colors = calculateShadowColors(
-      normal.color ?? color,
-      normal.intensity ?? intensity
+    const _colors = calculateShadowColors(
+      _current.color ?? color,
+      _current.intensity ?? intensity
     );
 
     return calculateBackgroundShadowProps(
-      normal.distance ?? distance,
-      normal.blur ?? blur,
-      colors?.shadow ?? shadow,
-      colors?.highlight ?? highlight,
-      normal?.isReverseShadow ?? false
+      _current.distance ?? distance,
+      _current.blur ?? blur,
+      _colors?.shadow ?? shadow,
+      _colors?.highlight ?? highlight,
+      _current.isReverseShadow ?? false
     );
   };
 
@@ -98,7 +65,7 @@ export const ToggleButton = ({
     base: color,
     highlight: "#ffffff",
   };
-  const { shadow, base, highlight } =
+  const { shadow, highlight } =
     calculateShadowColors(color, intensity) ?? defaultShadowColor;
 
   return (
