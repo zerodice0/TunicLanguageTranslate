@@ -19,10 +19,8 @@ export const LanguageRenderer = ({
   rowCount = 4,
   consonants,
   vowels,
-  defaultLineColor = "black",
-  defaultLineWidth = 1,
-  hoverLineColor = "black",
-  hoverLineWidth = 1,
+  lineColor = "black",
+  lineWidth = 1,
   isDrawingFrame = false,
 }: LanguageRendererProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -54,34 +52,14 @@ export const LanguageRenderer = ({
     }
   };
 
-  const _clear = (canvas: HTMLCanvasElement | null) => {
-    const context = canvas?.getContext("2d");
-    if (context) {
-      context.clearRect(0, 0, width, height);
-    }
-  };
-
   useEffect(() => {
     const canvas = canvasRef.current;
-
-    const mouseOver = () => {
-      _clear(canvas);
-      _render(canvas, hoverLineWidth, hoverLineColor);
-    };
-    const mouseLeave = () => {
-      _clear(canvas);
-      _render(canvas, defaultLineWidth, defaultLineColor);
-    };
-    canvasRef.current?.addEventListener("mouseover", mouseOver);
-    canvasRef.current?.addEventListener("mouseleave", mouseLeave);
-
-    _render(canvas, defaultLineWidth, defaultLineColor);
+    _render(canvasRef.current, lineWidth, lineColor);
 
     return () => {
-      canvas?.removeEventListener("mouseover", mouseOver);
-      canvas?.removeEventListener("mouseleave", mouseLeave);
+      canvas?.getContext("2d")?.clearRect(0, 0, canvas.width, canvas.height);
     };
-  }, []);
+  });
 
   return (
     <div>
