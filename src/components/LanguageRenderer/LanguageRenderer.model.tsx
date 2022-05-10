@@ -7,10 +7,8 @@ export interface LanguageRendererProps {
   columnCount?: number;
   consonants?: number[];
   vowels?: number[];
-  defaultLineWidth?: number;
-  hoverLineWidth?: number;
-  defaultLineColor?: string;
-  hoverLineColor?: string;
+  lineWidth?: number;
+  lineColor?: string;
   isDrawingFrame?: boolean;
 }
 
