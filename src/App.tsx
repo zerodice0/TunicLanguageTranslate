@@ -1,52 +1,24 @@
 import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
-import { useState } from "react";
 
+import { LanguageDisplay } from "./components/LanguageDisplay/LanguageDisplay";
 import { LanguageInput } from "./components/LanguageInput/LanguageInput";
-import { LanguageRenderer } from "./components/LanguageRenderer/LanguageRenderer";
-import {
-  parsingConsonantsToIPA,
-  parsingVowelsToIPA,
-} from "./modules/LanguageParer/LanguageParser";
+import { LanguageContextProvider } from "./context/LanguageContext/LanguageContext";
 
 export default function App() {
-  const [inputLanguage, setInputLanguage] = useState<{
-    consonants: number[];
-    vowels: number[];
-  }>({
-    consonants: [],
-    vowels: [],
-  });
-
   return (
-    <Box textAlign="center">
-      <Heading>Tunic Language Translator</Heading>
-      <Flex align="center" justify="center">
-        <Flex direction="column" width="100%">
+    <LanguageContextProvider>
+      <Box textAlign="center">
+        <Heading>Tunic Language Translator</Heading>
+        <Flex align="center" justify="center">
+          <Flex direction="column" width="100%">
+            <LanguageDisplay />
+            <LanguageInput />
+          </Flex>
           <Center width="100%">
-            <Text>Input</Text>
+            <Text>Result</Text>
           </Center>
-          <Center>
-            <LanguageRenderer
-              width={100}
-              height={150}
-              isDrawingFrame={true}
-              consonants={inputLanguage.consonants}
-              vowels={inputLanguage.vowels}
-              lineColor="#dddddd"
-              lineWidth={2}
-            />
-          </Center>
-          <Text>
-            Current:
-            {parsingConsonantsToIPA(inputLanguage.consonants) +
-              parsingVowelsToIPA(inputLanguage.vowels)}
-          </Text>
-          <LanguageInput />
         </Flex>
-        <Center width="100%">
-          <Text>Result</Text>
-        </Center>
-      </Flex>
-    </Box>
+      </Box>
+    </LanguageContextProvider>
   );
 }
