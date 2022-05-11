@@ -15,6 +15,7 @@ export const ToggleButton = ({
   checked,
   consonants = [],
   vowels = [],
+  onClick,
 }: ToggleButtonProps) => {
   const color = normal.color ?? "#dddddd";
   const intensity = normal.intensity ?? 5;
@@ -78,7 +79,10 @@ export const ToggleButton = ({
       shadow={getShadow().join(", ")}
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
-      onClick={() => setPushed(!isPushed)}
+      onClick={() => {
+        onClick && onClick(isPushed);
+        setPushed(!isPushed);
+      }}
     >
       <LanguageRenderer
         width={50}

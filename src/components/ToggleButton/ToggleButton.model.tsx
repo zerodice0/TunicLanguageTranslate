@@ -23,6 +23,7 @@ export interface ToggleButtonProps {
   checked?: ToggleButtonPropsComponent;
   consonants?: number[];
   vowels?: number[];
+  onClick?: (isToggled: boolean) => void;
 }
 
 export interface NeumorphismColors {
