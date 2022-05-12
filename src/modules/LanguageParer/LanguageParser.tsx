@@ -13,3 +13,13 @@ export const parsingConsonantsToIPA = (consonants: number[]) =>
 
 export const parsingVowelsToIPA = (vowels: number[]) =>
   predefinedVowels.filter(data => isSameArray(vowels, data.list))[0]?.ipa ?? "";
+
+export const isExistConsonants = (consonants: number[]) =>
+  predefinedConsonants.some(data =>
+    consonants.every(consonant => data.list.includes(consonant))
+  );
+
+export const isExistVowels = (vowels: number[]) =>
+  predefinedVowels.some(data =>
+    vowels.every(vowel => data.list.includes(vowel))
+  );
