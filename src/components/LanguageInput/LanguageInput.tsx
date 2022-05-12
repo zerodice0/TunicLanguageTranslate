@@ -37,22 +37,22 @@ const Consonants = () => {
                   normal={{
                     distance: 4,
                     blur: 10,
-                    color: "#1a202c",
-                    lineColor: "#dddddd",
+                    color: "#1A202C",
+                    lineColor: "#388654",
                     intensity: 30,
                   }}
-                  hover={{
+                  hovered={{
                     distance: 3,
                     blur: 20,
-                    color: "#dddddd",
-                    lineColor: "#1a202c",
+                    color: "#D5D5D5",
+                    lineColor: "#1A202C",
                     intensity: 60,
                   }}
-                  checked={{
+                  toggled={{
                     distance: 1,
                     blur: 10,
                     color: "#D5D5D5",
-                    lineColor: "#1a202c",
+                    lineColor: "#1A202C",
                     intensity: 10,
                     isReverseShadow: true,
                   }}
@@ -99,22 +99,22 @@ const Vowels = () => {
                   normal={{
                     distance: 4,
                     blur: 10,
-                    color: "#1a202c",
+                    color: "#1A202C",
                     lineColor: "#dddddd",
                     intensity: 30,
                   }}
-                  hover={{
+                  hovered={{
                     distance: 3,
                     blur: 20,
                     color: "#dddddd",
-                    lineColor: "#1a202c",
+                    lineColor: "#1A202C",
                     intensity: 60,
                   }}
-                  checked={{
+                  toggled={{
                     distance: 1,
                     blur: 10,
                     color: "#D5D5D5",
-                    lineColor: "#1a202c",
+                    lineColor: "#1A202C",
                     intensity: 10,
                     isReverseShadow: true,
                   }}
