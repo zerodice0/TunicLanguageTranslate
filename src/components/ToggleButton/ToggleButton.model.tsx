@@ -7,7 +7,7 @@ export interface ToggleButtonStyledProps {
   color: string;
 }
 
-interface ToggleButtonPropsComponent {
+export interface ToggleButtonPropsState {
   distance?: number;
   intensity?: number;
   blur?: number;
@@ -18,12 +18,14 @@ interface ToggleButtonPropsComponent {
   isReverseShadow?: boolean;
 }
 export interface ToggleButtonProps {
-  normal: ToggleButtonPropsComponent;
-  hover?: ToggleButtonPropsComponent;
-  checked?: ToggleButtonPropsComponent;
+  normal: ToggleButtonPropsState;
+  hovered?: ToggleButtonPropsState;
+  toggled?: ToggleButtonPropsState;
+  disabled?: ToggleButtonPropsState;
   consonants?: number[];
   vowels?: number[];
   onClick?: (isToggled: boolean) => void;
+  isDisabled?: boolean;
 }
 
 export interface NeumorphismColors {

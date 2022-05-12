@@ -1,7 +1,10 @@
 import { useState } from "react";
 
 import { LanguageRenderer } from "../LanguageRenderer/LanguageRenderer";
-import { ToggleButtonProps } from "./ToggleButton.model";
+import {
+  ToggleButtonProps,
+  ToggleButtonPropsState,
+} from "./ToggleButton.model";
 import { ToggleButtonStyled } from "./ToggleButton.view";
 import {
   calculateBackgroundShadowProps,
@@ -11,11 +14,13 @@ import {
 
 export const ToggleButton = ({
   normal,
-  hover,
-  checked,
+  hovered = { ...normal },
+  toggled = { ...normal },
+  disabled = { ...normal },
   consonants = [],
   vowels = [],
   onClick,
+  isDisabled = false,
 }: ToggleButtonProps) => {
   const color = normal.color ?? "#dddddd";
   const intensity = normal.intensity ?? 5;
@@ -27,21 +32,32 @@ export const ToggleButton = ({
   const [isPushed, setPushed] = useState(false);
   const [isHovered, setHovered] = useState(false);
 
+  const pickCurrentState = (): ToggleButtonPropsState => {
+    let _current: ToggleButtonPropsState = normal;
+
+    if (isDisabled) {
+      _current = disabled;
+    } else if (isPushed) {
+      _current = toggled;
+    } else if (isHovered) {
+      _current = hovered;
+    }
+
+    return _current;
+  };
+
   const getLineColor = () => {
-    const _current =
-      (isPushed ? checked : isHovered ? hover : normal) ?? normal;
+    const _current = pickCurrentState();
     return _current.lineColor ?? color;
   };
 
   const getBackground = () => {
-    const _current =
-      (isPushed ? checked : isHovered ? hover : normal) ?? normal;
+    const _current = pickCurrentState();
     return _current.color ?? color;
   };
 
   const getShadow = () => {
-    const _current =
-      (isPushed ? checked : isHovered ? hover : normal) ?? normal;
+    const _current = pickCurrentState();
 
     const _colors = calculateShadowColors(
       _current.color ?? color,
@@ -80,8 +96,10 @@ export const ToggleButton = ({
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
       onClick={() => {
-        onClick && onClick(isPushed);
-        setPushed(!isPushed);
+        if (!isDisabled) {
+          onClick && onClick(isPushed);
+          setPushed(!isPushed);
+        }
       }}
     >
       <LanguageRenderer
