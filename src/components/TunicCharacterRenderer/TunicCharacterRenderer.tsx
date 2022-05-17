@@ -4,15 +4,15 @@ import styled from "styled-components";
 import {
   calculateColumns,
   calculateRows,
-  LanguageRendererProps,
-} from "./LanguageRenderer.model";
-import { render } from "./LanguageRenderer.viewModel";
+  TunicCharacterRendererProps,
+} from "./TunicCharacterRenderer.model";
+import { render } from "./TunicCharacterRenderer.viewModel";
 
 const Canvas = styled.canvas`
   border-radius: 5px;
 `;
 
-export const LanguageRenderer = ({
+export const TunicCharacterRenderer = ({
   width,
   height,
   columnCount = 8,
@@ -22,7 +22,7 @@ export const LanguageRenderer = ({
   lineColor = "black",
   lineWidth = 1,
   isDrawingFrame = false,
-}: LanguageRendererProps) => {
+}: TunicCharacterRendererProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const rows = calculateRows(width, rowCount);

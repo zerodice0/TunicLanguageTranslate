@@ -1,15 +1,15 @@
 import { Center, Flex, Text } from "@chakra-ui/react";
 import { useAtomValue } from "jotai";
 
-import { CurrentCharacter } from "../../atom/LanguageAtom/LanguageAtom";
+import { CurrentTunicCharacter } from "../../atom/TunicLanguageAtom/TunicLanguageAtom";
 import {
   parsingConsonantsToIPA,
   parsingVowelsToIPA,
 } from "../../modules/LanguageParer/LanguageParser";
-import { LanguageRenderer } from "../LanguageRenderer/LanguageRenderer";
+import { TunicCharacterRenderer } from "../\bTunicCharacterRenderer/TunicCharacterRenderer";
 
-export const LanguageDisplay = () => {
-  const { consonants, vowels } = useAtomValue(CurrentCharacter);
+export const CurrentTunicCharacterDisplay = () => {
+  const { consonants, vowels } = useAtomValue(CurrentTunicCharacter);
 
   return (
     <Flex direction="column" width="100%">
@@ -17,7 +17,7 @@ export const LanguageDisplay = () => {
         <Text>Input</Text>
       </Center>
       <Center>
-        <LanguageRenderer
+        <TunicCharacterRenderer
           width={100}
           height={150}
           isDrawingFrame={true}

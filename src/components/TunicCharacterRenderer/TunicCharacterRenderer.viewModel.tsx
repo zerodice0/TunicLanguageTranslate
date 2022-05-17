@@ -1,5 +1,5 @@
 import { drawLine, drawLines } from "../../modules/Drawer/Drawer";
-import { calculateConsonantsAndVowels } from "./LanguageRenderer.model";
+import { calculateConsonantsAndVowels } from "./TunicCharacterRenderer.model";
 
 export const render = (
   context: CanvasRenderingContext2D,

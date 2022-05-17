@@ -1,6 +1,6 @@
 import { Line } from "../../modules/Drawer/Drawer.model";
 
-export interface LanguageRendererProps {
+export interface TunicCharacterRendererProps {
   width: number;
   height: number;
   rowCount?: number;
@@ -12,11 +12,11 @@ export interface LanguageRendererProps {
   isDrawingFrame?: boolean;
 }
 
-interface Language {
-  vowels: LanguageComponent;
-  consonants: LanguageComponent;
+interface Character {
+  vowels: CharacterStroke;
+  consonants: CharacterStroke;
 }
-export interface LanguageComponent {
+export interface CharacterStroke {
   upSide: Line[];
   downSide: Line[];
   sub: Line[];
@@ -39,7 +39,7 @@ export const calculateConsonantsAndVowels = (
   rowCount: number,
   rows?: number[],
   columns?: number[]
-): Language => {
+): Character => {
   const _rows = rows ?? calculateRows(canvasWidth, rowCount);
   const _columns = columns ?? calculateColumns(canvasHeight, columnCount);
 

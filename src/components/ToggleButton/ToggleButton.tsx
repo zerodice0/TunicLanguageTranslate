@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { LanguageRenderer } from "../LanguageRenderer/LanguageRenderer";
+import { TunicCharacterRenderer } from "../\bTunicCharacterRenderer/TunicCharacterRenderer";
 import {
   ToggleButtonProps,
   ToggleButtonPropsState,
@@ -102,7 +102,7 @@ export const ToggleButton = ({
         }
       }}
     >
-      <LanguageRenderer
+      <TunicCharacterRenderer
         width={50}
         height={75}
         consonants={consonants}

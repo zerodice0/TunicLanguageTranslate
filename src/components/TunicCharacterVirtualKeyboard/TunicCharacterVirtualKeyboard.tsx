@@ -9,10 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 
-import { CurrentCharacter } from "../../atom/LanguageAtom/LanguageAtom";
+import { CurrentTunicCharacter } from "../../atom/TunicLanguageAtom/TunicLanguageAtom";
 import { ToggleButton } from "../ToggleButton/ToggleButton";
 
-export const LanguageInput = () => {
+export const TunicCharacterVirtualKeyboard = () => {
   const enterLanguage = () => {
     console.log("Enter Language");
   };
@@ -38,7 +38,7 @@ export const LanguageInput = () => {
 };
 
 const Consonants = () => {
-  const [current, setCurrent] = useAtom(CurrentCharacter);
+  const [current, setCurrent] = useAtom(CurrentTunicCharacter);
 
   return (
     <Flex direction="column" width="100%" marginTop="5">
@@ -103,7 +103,7 @@ const Consonants = () => {
 };
 
 const Vowels = () => {
-  const [current, setCurrent] = useAtom(CurrentCharacter);
+  const [current, setCurrent] = useAtom(CurrentTunicCharacter);
 
   return (
     <Flex direction="column" width="100%" marginTop="5">

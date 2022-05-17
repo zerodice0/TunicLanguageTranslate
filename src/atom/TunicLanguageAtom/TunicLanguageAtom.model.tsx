@@ -1,4 +1,4 @@
-export interface LanguageAtomModel {
+export interface TunicCharacter {
   consonants: number[];
   vowels: number[];
 }
