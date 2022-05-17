@@ -6,7 +6,7 @@ import {
   parsingConsonantsToIPA,
   parsingVowelsToIPA,
 } from "../../modules/LanguageParer/LanguageParser";
-import { TunicCharacterRenderer } from "../\bTunicCharacterRenderer/TunicCharacterRenderer";
+import { TunicCharacterRenderer } from "../TunicCharacterRenderer/TunicCharacterRenderer";
 
 export const CurrentTunicCharacterDisplay = () => {
   const { consonants, vowels } = useAtomValue(CurrentTunicCharacter);
