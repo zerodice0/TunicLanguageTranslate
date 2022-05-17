@@ -1,12 +1,24 @@
-import { Button, Center, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
-import { useContext } from "react";
+import {
+  Button,
+  Center,
+  Flex,
+  Grid,
+  GridItem,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
+import { useAtom } from "jotai";
 
-import { LanguageContext } from "../../context/LanguageContext/LanguageContext";
+import { CurrentCharacter } from "../../atom/LanguageAtom/LanguageAtom";
 import { ToggleButton } from "../ToggleButton/ToggleButton";
 
 export const LanguageInput = () => {
   const enterLanguage = () => {
     console.log("Enter Language");
+  };
+
+  const enterSpace = () => {
+    console.log("Enter Space");
   };
 
   return (
@@ -15,15 +27,18 @@ export const LanguageInput = () => {
         <Consonants />
         <Vowels />
       </Flex>
-      <Center marginTop="5">
+      <Flex direction="row" marginTop="5" gap={5}>
+        <Spacer />
         <Button onClick={enterLanguage}>Enter</Button>
-      </Center>
+        <Button onClick={enterSpace}>Space</Button>
+        <Spacer />
+      </Flex>
     </form>
   );
 };
 
 const Consonants = () => {
-  const { consonants, setConsonants } = useContext(LanguageContext);
+  const [current, setCurrent] = useAtom(CurrentCharacter);
 
   return (
     <Flex direction="column" width="100%" marginTop="5">
@@ -38,7 +53,7 @@ const Consonants = () => {
                     distance: 4,
                     blur: 10,
                     color: "#1A202C",
-                    lineColor: "#388654",
+                    lineColor: "#D5D5D5",
                     intensity: 30,
                   }}
                   hovered={{
@@ -59,18 +74,21 @@ const Consonants = () => {
                   consonants={[consonant + row * 3]}
                   onClick={isToggled => {
                     if (isToggled) {
-                      setConsonants &&
-                        setConsonants(
-                          consonants.filter(
-                            _consonant => _consonant !== consonant + row * 3
-                          )
-                        );
+                      setCurrent({
+                        consonants: current.consonants.filter(
+                          _consonant => _consonant !== consonant + row * 3
+                        ),
+                        vowels: current.vowels,
+                      });
                     } else {
-                      if (
-                        setConsonants &&
-                        !consonants.includes(consonant + row * 3)
-                      ) {
-                        setConsonants([...consonants, consonant + row * 3]);
+                      if (!current.consonants.includes(consonant + row * 3)) {
+                        setCurrent({
+                          consonants: [
+                            ...current.consonants,
+                            consonant + row * 3,
+                          ],
+                          vowels: current.vowels,
+                        });
                       }
                     }
                   }}
@@ -85,7 +103,7 @@ const Consonants = () => {
 };
 
 const Vowels = () => {
-  const { vowels, setVowels } = useContext(LanguageContext);
+  const [current, setCurrent] = useAtom(CurrentCharacter);
 
   return (
     <Flex direction="column" width="100%" marginTop="5">
@@ -121,13 +139,18 @@ const Vowels = () => {
                   vowels={[vowel + row * 3]}
                   onClick={isToggled => {
                     if (isToggled) {
-                      setVowels &&
-                        setVowels(
-                          vowels.filter(_vowel => _vowel !== vowel + row * 3)
-                        );
+                      setCurrent({
+                        consonants: current.consonants,
+                        vowels: current.vowels.filter(
+                          _vowel => _vowel !== vowel + row * 3
+                        ),
+                      });
                     } else {
-                      if (setVowels && !vowels.includes(vowel + row * 3)) {
-                        setVowels([...vowels, vowel + row * 3]);
+                      if (!current.vowels.includes(vowel + row * 3)) {
+                        setCurrent({
+                          consonants: current.consonants,
+                          vowels: [...current.vowels, vowel + row * 3],
+                        });
                       }
                     }
                   }}

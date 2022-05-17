@@ -1,7 +1,7 @@
 import { Center, Flex, Text } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useAtomValue } from "jotai";
 
-import { LanguageContext } from "../../context/LanguageContext/LanguageContext";
+import { CurrentCharacter } from "../../atom/LanguageAtom/LanguageAtom";
 import {
   parsingConsonantsToIPA,
   parsingVowelsToIPA,
@@ -9,7 +9,7 @@ import {
 import { LanguageRenderer } from "../LanguageRenderer/LanguageRenderer";
 
 export const LanguageDisplay = () => {
-  const { consonants, vowels } = useContext(LanguageContext);
+  const { consonants, vowels } = useAtomValue(CurrentCharacter);
 
   return (
     <Flex direction="column" width="100%">
