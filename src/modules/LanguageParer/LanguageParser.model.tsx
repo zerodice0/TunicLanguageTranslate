@@ -13,7 +13,7 @@ export const predefinedVowels = [
   { value: "ir", ipa: "ɪər", list: [0, 2, 3, 4, 5] },
   { value: "oh", ipa: "oʊ", list: [0, 1, 2, 3, 4, 5] },
   { value: "oi", ipa: "ɔɪ", list: [4] },
-  { value: "oo", ipa: "ʊər", list: [0, 1, 2, 3, 4] },
+  { value: "oo", ipa: "u:", list: [0, 1, 2, 3, 4] },
   { value: "ou", ipa: "aʊ", list: [0, 3, 4] },
   { value: "ow", ipa: "aʊ", list: [5] },
   { value: "ore", ipa: "ɔər", list: [0, 1, 2, 3, 5] },
