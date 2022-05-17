@@ -1,9 +1,17 @@
-import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { useAtomValue } from "jotai";
 
+import { CurrentTunicWord } from "./atom/TunicLanguageAtom/TunicLanguageAtom";
 import { CurrentTunicCharacterDisplay } from "./components/CurrentTunicCharacterDisplay/CurrentTunicCharacterDisplay";
 import { TunicCharacterVirtualKeyboard } from "./components/\bTunicCharacterVirtualKeyboard/TunicCharacterVirtualKeyboard";
+import {
+  parsingConsonantsToIPA,
+  parsingVowelsToIPA,
+} from "./modules/LanguageParer/LanguageParser";
 
 export default function App() {
+  const word = useAtomValue(CurrentTunicWord);
+
   return (
     <Box textAlign="center">
       <Heading>Tunic Language Translator</Heading>
@@ -12,9 +20,17 @@ export default function App() {
           <CurrentTunicCharacterDisplay />
           <TunicCharacterVirtualKeyboard />
         </Flex>
-        <Center width="100%">
+        <Flex direction="column" width="100%">
           <Text>Result</Text>
-        </Center>
+          <Text>
+            {word.map(character =>
+              character.consonants.length === 0 && character.vowels.length === 0
+                ? " "
+                : parsingConsonantsToIPA(character.consonants) +
+                  parsingVowelsToIPA(character.vowels)
+            )}
+          </Text>
+        </Flex>
       </Flex>
     </Box>
   );
