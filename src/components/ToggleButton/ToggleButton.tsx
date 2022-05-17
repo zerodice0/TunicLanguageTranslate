@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { TunicCharacterRenderer } from "../\bTunicCharacterRenderer/TunicCharacterRenderer";
+import { TunicCharacterRenderer } from "../TunicCharacterRenderer/TunicCharacterRenderer";
 import {
   ToggleButtonProps,
   ToggleButtonPropsState,
@@ -21,6 +21,7 @@ export const ToggleButton = ({
   vowels = [],
   onClick,
   isDisabled = false,
+  isToggled = false,
 }: ToggleButtonProps) => {
   const color = normal.color ?? "#dddddd";
   const intensity = normal.intensity ?? 5;
@@ -28,8 +29,6 @@ export const ToggleButton = ({
   const blur = normal.blur ?? 10;
   const padding = normal.padding ?? 0;
   const radius = normal.radius ?? 5;
-
-  const [isPushed, setPushed] = useState(false);
   const [isHovered, setHovered] = useState(false);
 
   const pickCurrentState = (): ToggleButtonPropsState => {
@@ -37,7 +36,7 @@ export const ToggleButton = ({
 
     if (isDisabled) {
       _current = disabled;
-    } else if (isPushed) {
+    } else if (isToggled) {
       _current = toggled;
     } else if (isHovered) {
       _current = hovered;
@@ -96,9 +95,8 @@ export const ToggleButton = ({
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
       onClick={() => {
-        if (!isDisabled) {
-          onClick && onClick(isPushed);
-          setPushed(!isPushed);
+        if (!isDisabled && onClick) {
+          onClick();
         }
       }}
     >

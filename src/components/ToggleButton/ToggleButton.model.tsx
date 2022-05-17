@@ -24,8 +24,9 @@ export interface ToggleButtonProps {
   disabled?: ToggleButtonPropsState;
   consonants?: number[];
   vowels?: number[];
-  onClick?: (isToggled: boolean) => void;
+  onClick?: () => void;
   isDisabled?: boolean;
+  isToggled?: boolean;
 }
 
 export interface NeumorphismColors {
