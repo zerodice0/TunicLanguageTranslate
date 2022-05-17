@@ -9,16 +9,32 @@ import {
 } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 
-import { CurrentTunicCharacter } from "../../atom/TunicLanguageAtom/TunicLanguageAtom";
+import {
+  CurrentTunicCharacter,
+  CurrentTunicWord,
+} from "../../atom/TunicLanguageAtom/TunicLanguageAtom";
 import { ToggleButton } from "../ToggleButton/ToggleButton";
 
 export const TunicCharacterVirtualKeyboard = () => {
-  const enterLanguage = () => {
-    console.log("Enter Language");
+  const [currentTunicCharacter, setCurrentTunicCharacter] = useAtom(
+    CurrentTunicCharacter
+  );
+  const [currentTunicWord, setCurrentTunicWord] = useAtom(CurrentTunicWord);
+
+  const enterCharacter = () => {
+    setCurrentTunicWord([...currentTunicWord, currentTunicCharacter]);
+    setCurrentTunicCharacter({
+      consonants: [],
+      vowels: [],
+    });
   };
 
   const enterSpace = () => {
-    console.log("Enter Space");
+    setCurrentTunicWord([...currentTunicWord, { consonants: [], vowels: [] }]);
+  };
+
+  const enterBackspace = () => {
+    setCurrentTunicWord(currentTunicWord.slice(0, -1));
   };
 
   return (
@@ -29,8 +45,9 @@ export const TunicCharacterVirtualKeyboard = () => {
       </Flex>
       <Flex direction="row" marginTop="5" gap={5}>
         <Spacer />
-        <Button onClick={enterLanguage}>Enter</Button>
+        <Button onClick={enterCharacter}>Enter</Button>
         <Button onClick={enterSpace}>Space</Button>
+        <Button onClick={enterBackspace}>Backspace</Button>
         <Spacer />
       </Flex>
     </form>
@@ -72,7 +89,12 @@ const Consonants = () => {
                     isReverseShadow: true,
                   }}
                   consonants={[consonant + row * 3]}
-                  onClick={isToggled => {
+                  isToggled={current.consonants.includes(consonant + row * 3)}
+                  onClick={() => {
+                    const isToggled = current.consonants.includes(
+                      consonant + row * 3
+                    );
+
                     if (isToggled) {
                       setCurrent({
                         consonants: current.consonants.filter(
@@ -137,7 +159,10 @@ const Vowels = () => {
                     isReverseShadow: true,
                   }}
                   vowels={[vowel + row * 3]}
-                  onClick={isToggled => {
+                  isToggled={current.vowels.includes(vowel + row * 3)}
+                  onClick={() => {
+                    const isToggled = current.vowels.includes(vowel + row * 3);
+
                     if (isToggled) {
                       setCurrent({
                         consonants: current.consonants,
