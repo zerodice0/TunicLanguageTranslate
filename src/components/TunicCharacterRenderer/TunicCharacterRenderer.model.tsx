@@ -43,7 +43,7 @@ export const calculateConsonantsAndVowels = (
   const _rows = rows ?? calculateRows(canvasWidth, rowCount);
   const _columns = columns ?? calculateColumns(canvasHeight, columnCount);
 
-  const columnsHeightHalf = canvasHeight / columnCount / 2;
+  const columnsHeightHalf = canvasHeight / columnCount;
 
   const points = [
     { x: _rows[0], y: _columns[1] },
@@ -55,7 +55,7 @@ export const calculateConsonantsAndVowels = (
     },
     {
       x: _rows[2],
-      y: canvasHeight / 2,
+      y: _columns[3],
     },
     {
       x: _rows[2],
@@ -64,6 +64,7 @@ export const calculateConsonantsAndVowels = (
     { x: _rows[0], y: _columns[5] },
     { x: _rows[2], y: _columns[6] },
     { x: _rows[4], y: _columns[5] },
+    { x: _rows[2], y: _columns[7] },
   ];
 
   return {
@@ -71,7 +72,7 @@ export const calculateConsonantsAndVowels = (
       upSide: [
         {
           start: points[0],
-          end: { x: _rows[0], y: _columns[3] },
+          end: { x: _rows[0], y: _columns[2] },
         },
         {
           start: points[0],

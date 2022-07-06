@@ -50,8 +50,8 @@ export const render = (
   drawLine(
     context,
     {
-      start: { x: 0, y: height / 2 },
-      end: { x: width, y: height / 2 },
+      start: { x: 0, y: columns[3] },
+      end: { x: width, y: columns[3] },
     },
     { lineWidth: lineWidth, lineColor: lineColor }
   );

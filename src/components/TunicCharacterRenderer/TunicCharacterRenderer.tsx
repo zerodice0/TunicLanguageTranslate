@@ -15,7 +15,7 @@ const Canvas = styled.canvas`
 export const TunicCharacterRenderer = ({
   width,
   height,
-  columnCount = 8,
+  columnCount = 9,
   rowCount = 4,
   consonants,
   vowels,
