@@ -25,6 +25,7 @@ export interface ToggleButtonProps {
   consonants?: number[];
   vowels?: number[];
   onClick?: (isToggled: boolean, vowelStroke: number) => void;
+  isReversePoint?: boolean;
   isDisabled?: boolean;
   isToggled?: boolean;
 }

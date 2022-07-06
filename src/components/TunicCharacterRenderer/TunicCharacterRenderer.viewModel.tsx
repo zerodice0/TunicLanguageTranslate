@@ -1,8 +1,9 @@
-import { drawLine, drawLines } from "../../modules/Drawer/Drawer";
+import { drawLine, drawLines, drawPoint } from "../../modules/Drawer/Drawer";
 import { calculateConsonantsAndVowels } from "./TunicCharacterRenderer.model";
 
 export const render = (
   context: CanvasRenderingContext2D,
+  isReversePoint: boolean,
   isDrawingFrame: boolean,
   rows: number[],
   columns: number[],
@@ -55,6 +56,17 @@ export const render = (
     },
     { lineWidth: lineWidth, lineColor: lineColor }
   );
+
+  // Draw Reverse Point
+  isReversePoint &&
+    drawPoint(
+      context,
+      {
+        x: rows[2],
+        y: columns[7],
+      },
+      { lineWidth: lineWidth, lineColor: lineColor }
+    );
 
   // Draw Base Points
   // drawPoints(

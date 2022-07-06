@@ -10,6 +10,7 @@ export interface TunicCharacterRendererProps {
   lineWidth?: number;
   lineColor?: string;
   isDrawingFrame?: boolean;
+  isReversePoint?: boolean;
 }
 
 interface Character {

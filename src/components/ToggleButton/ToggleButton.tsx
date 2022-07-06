@@ -20,6 +20,7 @@ export const ToggleButton = ({
   consonants = [],
   vowels = [],
   onClick,
+  isReversePoint = false,
   isDisabled = false,
   isToggled = false,
 }: ToggleButtonProps) => {
@@ -107,6 +108,7 @@ export const ToggleButton = ({
         vowels={vowels}
         lineColor={getLineColor()}
         lineWidth={1}
+        isReversePoint={isReversePoint}
         isDrawingFrame={true}
       />
     </ToggleButtonStyled>

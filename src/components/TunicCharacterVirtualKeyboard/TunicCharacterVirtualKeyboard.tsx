@@ -76,6 +76,17 @@ export const TunicCharacterVirtualKeyboard = () => {
           toggledProps={toggledProps}
         />
       </Flex>
+      <Flex direction="row">
+        <Center>
+          <ToggleButton
+            normal={normalProps}
+            hovered={hoveredProps}
+            toggled={toggledProps}
+            isReversePoint={true}
+            onClick={() => console.log("a")}
+          />
+        </Center>
+      </Flex>
       <Flex direction="row" marginTop="5" gap={5}>
         <Spacer />
         <Button onClick={enterCharacter}>Enter</Button>

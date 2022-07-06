@@ -21,6 +21,7 @@ export const TunicCharacterRenderer = ({
   vowels,
   lineColor = "black",
   lineWidth = 1,
+  isReversePoint = false,
   isDrawingFrame = false,
 }: TunicCharacterRendererProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,6 +38,7 @@ export const TunicCharacterRenderer = ({
     if (context) {
       render(
         context,
+        isReversePoint,
         isDrawingFrame,
         rows,
         columns,
