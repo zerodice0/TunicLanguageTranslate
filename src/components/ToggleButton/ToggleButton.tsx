@@ -96,7 +96,7 @@ export const ToggleButton = ({
       onMouseOut={() => setHovered(false)}
       onClick={() => {
         if (!isDisabled && onClick) {
-          onClick();
+          onClick(isToggled, vowels[0]);
         }
       }}
     >
