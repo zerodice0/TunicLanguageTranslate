@@ -1,18 +1,7 @@
-import {
-  Button,
-  Center,
-  Flex,
-  Grid,
-  GridItem,
-  Spacer,
-  Text,
-} from "@chakra-ui/react";
+import { Center, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 
-import {
-  CurrentTunicCharacter,
-  CurrentTunicWord,
-} from "../../atom/TunicLanguageAtom/TunicLanguageAtom";
+import { CurrentTunicCharacter } from "../../atom/TunicLanguageAtom/TunicLanguageAtom";
 import { ToggleButton } from "../ToggleButton/ToggleButton";
 import { ToggleButtonPropsState } from "../ToggleButton/ToggleButton.model";
 
@@ -20,24 +9,6 @@ export const TunicCharacterVirtualKeyboard = () => {
   const [currentTunicCharacter, setCurrentTunicCharacter] = useAtom(
     CurrentTunicCharacter
   );
-  const [currentTunicWord, setCurrentTunicWord] = useAtom(CurrentTunicWord);
-
-  const enterCharacter = () => {
-    setCurrentTunicWord([...currentTunicWord, currentTunicCharacter]);
-    setCurrentTunicCharacter({
-      consonants: [],
-      vowels: [],
-      isReverse: false,
-    });
-  };
-
-  const enterSpace = () => {
-    setCurrentTunicWord([...currentTunicWord, { consonants: [], vowels: [] }]);
-  };
-
-  const enterBackspace = () => {
-    setCurrentTunicWord(currentTunicWord.slice(0, -1));
-  };
 
   const normalProps: ToggleButtonPropsState = {
     distance: 4,
@@ -92,13 +63,6 @@ export const TunicCharacterVirtualKeyboard = () => {
           }}
         />
       </Center>
-      <Flex direction="row" marginTop="5" gap={5}>
-        <Spacer />
-        <Button onClick={enterCharacter}>Enter</Button>
-        <Button onClick={enterSpace}>Space</Button>
-        <Button onClick={enterBackspace}>Backspace</Button>
-        <Spacer />
-      </Flex>
     </form>
   );
 };
