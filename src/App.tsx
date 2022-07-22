@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { useAtomValue } from "jotai";
 
 import { CurrentTunicWord } from "./atom/TunicLanguageAtom/TunicLanguageAtom";
+import { TunicCharacter } from "./atom/TunicLanguageAtom/TunicLanguageAtom.model";
 import { CurrentTunicCharacterDisplay } from "./components/CurrentTunicCharacterDisplay/CurrentTunicCharacterDisplay";
 import { TunicCharacterRenderer } from "./components/TunicCharacterRenderer/TunicCharacterRenderer";
 import { TunicCharacterVirtualKeyboard } from "./components/\bTunicCharacterVirtualKeyboard/TunicCharacterVirtualKeyboard";
@@ -12,6 +13,24 @@ import {
 
 export default function App() {
   const word = useAtomValue(CurrentTunicWord);
+
+  const parsingCharacter = (character: TunicCharacter) => {
+    let result = "";
+
+    if (character.consonants.length === 0 && character.vowels.length === 0) {
+      result = " ";
+    } else if (character.isReverse) {
+      result =
+        parsingVowelsToIPA(character.vowels) +
+        parsingConsonantsToIPA(character.consonants);
+    } else {
+      result =
+        parsingConsonantsToIPA(character.consonants) +
+        parsingVowelsToIPA(character.vowels);
+    }
+
+    return result;
+  };
 
   return (
     <Box textAlign="center">
@@ -39,14 +58,7 @@ export default function App() {
               );
             })}
           </Flex>
-          <Text>
-            {word.map(character =>
-              character.consonants.length === 0 && character.vowels.length === 0
-                ? " "
-                : parsingConsonantsToIPA(character.consonants) +
-                  parsingVowelsToIPA(character.vowels)
-            )}
-          </Text>
+          <Text>{word.map(character => parsingCharacter(character))}</Text>
         </Flex>
       </Flex>
     </Box>
