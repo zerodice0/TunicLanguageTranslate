@@ -30,6 +30,7 @@ export default function App() {
                   key={index}
                   width={40}
                   height={70}
+                  isReversePoint={character.isReverse}
                   consonants={character.consonants}
                   vowels={character.vowels}
                   lineColor="#D5D5D5"

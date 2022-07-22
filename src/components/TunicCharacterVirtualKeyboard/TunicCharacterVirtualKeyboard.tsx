@@ -27,6 +27,7 @@ export const TunicCharacterVirtualKeyboard = () => {
     setCurrentTunicCharacter({
       consonants: [],
       vowels: [],
+      isReverse: false,
     });
   };
 
@@ -76,17 +77,21 @@ export const TunicCharacterVirtualKeyboard = () => {
           toggledProps={toggledProps}
         />
       </Flex>
-      <Flex direction="row">
-        <Center>
-          <ToggleButton
-            normal={normalProps}
-            hovered={hoveredProps}
-            toggled={toggledProps}
-            isReversePoint={true}
-            onClick={() => console.log("a")}
-          />
-        </Center>
-      </Flex>
+      <Center>
+        <ToggleButton
+          normal={normalProps}
+          hovered={hoveredProps}
+          toggled={toggledProps}
+          isToggled={currentTunicCharacter.isReverse}
+          isReversePoint={true}
+          onClick={isToggled => {
+            setCurrentTunicCharacter({
+              ...currentTunicCharacter,
+              isReverse: !isToggled,
+            });
+          }}
+        />
+      </Center>
       <Flex direction="row" marginTop="5" gap={5}>
         <Spacer />
         <Button onClick={enterCharacter}>Enter</Button>
@@ -117,6 +122,7 @@ const Consonants = ({
     setCurrent({
       consonants: newConsonants,
       vowels: current.vowels,
+      isReverse: current.isReverse,
     });
   };
 
@@ -176,6 +182,7 @@ const Vowels = ({
     setCurrent({
       consonants: current.consonants,
       vowels: newVowels,
+      isReverse: current.isReverse,
     });
   };
 

@@ -9,7 +9,7 @@ import {
 import { TunicCharacterRenderer } from "../TunicCharacterRenderer/TunicCharacterRenderer";
 
 export const CurrentTunicCharacterDisplay = () => {
-  const { consonants, vowels } = useAtomValue(CurrentTunicCharacter);
+  const { consonants, vowels, isReverse } = useAtomValue(CurrentTunicCharacter);
 
   return (
     <Flex direction="column" width="100%">
@@ -21,6 +21,7 @@ export const CurrentTunicCharacterDisplay = () => {
           width={100}
           height={150}
           isDrawingFrame={true}
+          isReversePoint={isReverse}
           consonants={consonants}
           vowels={vowels}
           lineColor="#dddddd"
@@ -29,7 +30,11 @@ export const CurrentTunicCharacterDisplay = () => {
       </Center>
       <Text>
         Current:
-        {parsingConsonantsToIPA(consonants) + parsingVowelsToIPA(vowels)}
+        {isReverse
+          ? `${parsingVowelsToIPA(vowels)}${parsingConsonantsToIPA(consonants)}`
+          : `${parsingConsonantsToIPA(consonants)}${parsingVowelsToIPA(
+              vowels
+            )}`}
       </Text>
     </Flex>
   );
